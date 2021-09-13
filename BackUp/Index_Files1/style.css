@@ -1,0 +1,56 @@
+@font-face {
+	font-family: 'weather-thin-icons';
+	src:url('fonts/icomoon.eot?hamay3');
+	src:url('fonts/icomoon.eot?#iefixhamay3') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?hamay3') format('truetype'),
+		url('fonts/icomoon.woff?hamay3') format('woff'),
+		url('fonts/icomoon.svg?hamay3#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'weather-thin-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	background-image: none;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.icon-storm:before {
+	content: "\e900";
+}
+.icon-snow:before {
+	content: "\e901";
+}
+.icon-sleet:before {
+	content: "\e902";
+}
+.icon-rain:before {
+	content: "\e903";
+}
+.icon-fog:before {
+	content: "\e904";
+}
+.icon-cloudy:before {
+	content: "\e905";
+}
+.icon-cloudly-sun:before {
+	content: "\e906";
+}
+.icon-cloudlynight:before {
+	content: "\e907";
+}
+.icon-clear-night:before {
+	content: "\e908";
+}
+.icon-clear:before {
+	content: "\e909";
+}
+

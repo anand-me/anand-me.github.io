@@ -17,7 +17,7 @@ This code makes use of Moderncv documentclass by Xavier Danaux (https://github.c
 ├── conferences
 │&nbsp;&nbsp; ├── several conference papers
 ├── presentation
-│&nbsp;&nbsp; ├── several presentation images
+│&nbsp;&nbsp; ├── several presentation image
 ├── LICENSE
 ├── README.md
 └── website

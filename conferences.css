@@ -1,0 +1,13 @@
+/* Existing styles - kept unchanged */
+#conferences h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #4682b4;
+  padding-bottom: 10px;
+  transition: color 0.3s ease;
+}

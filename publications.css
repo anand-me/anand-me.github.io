@@ -1,0 +1,157 @@
+/* Existing styles - kept unchanged */
+#publications h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #4682b4;
+  padding-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+#publications h2:hover {
+  color: #4682b4;
+}
+
+#publications .container {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+/* Fancy link styles */
+.fancy-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s, border-bottom 0.3s, background-size 0.3s;
+  background-image: linear-gradient(to right, #007bff, #0056b3);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0% 100%;
+}
+
+.fancy-link:hover {
+  color: #ff4500;
+  background-size: 100% 2px;
+}
+
+/* Adjustments for fancy links in publication section */
+.publication-box .fancy-link {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.publication-box papertitle .fancy-link {
+  color: #333;
+}
+
+.publication-box papertitle .fancy-link:hover {
+  color: #ff4500;
+}
+
+/* New styles for PDF, BibTeX, and DOI links */
+.publication-box .link-text {
+  font-weight: bold;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.publication-box .fancy-link:hover .link-text {
+  background-color: #ff4500;
+  color: white;
+}
+
+/* Specific colors for each link type */
+.publication-box .fancy-link[href$=".PDF"] .link-text {
+  color: #d92121;
+}
+
+.publication-box .fancy-link[href*="BibTex"] .link-text {
+  color: #21b521;
+}
+
+.publication-box .fancy-link[href*="DOI"] .link-text {
+  color: #2121d9;
+}
+
+/* Updated styles for table-based layout */
+.publication-category {
+  margin-bottom: 40px;
+}
+
+.publication-category h3 {
+  font-size: 20px;
+  color: #4682b4;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #4682b4;
+}
+
+.publication-box {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.publication-box table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+
+.publication-box td {
+  vertical-align: top;
+}
+
+.publication-number {
+  font-weight: bold;
+  color: #4682b4;
+  margin-right: 5px;
+}
+
+papertitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+papertitle a {
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+papertitle a:hover {
+  color: #4682b4;
+}
+
+.one {
+  width: 100%;
+  overflow: hidden;
+}
+
+.two {
+  width: 100%;
+}
+
+.two img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .publication-box td {
+    display: block;
+    width: 100%;
+  }
+
+  .publication-box td:first-child {
+    padding-bottom: 10px;
+  }
+}
+

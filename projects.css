@@ -1,0 +1,269 @@
+/* Projects section styles */
+#projects h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'Georgia', serif;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #4682b4;
+  padding-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+#projects h2:hover {
+  color: #4682b4;
+}
+
+.project-item {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 20px;
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.project-title a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project-title a:hover {
+  color: #4682b4;
+}
+
+.project-info {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.project-content-wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.project-image {
+  width: 25%;
+  padding-right: 20px;
+  padding-top: 5px; /* Align with text start */
+}
+
+.project-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.project-description {
+  width: 75%;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4682b4;
+  border-radius: 3px;
+  margin-left: 10px;
+}
+
+/* Fancy link styles */
+.fancy-link {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s, border-bottom 0.3s, background-size 0.3s;
+  background-image: linear-gradient(to right, #007bff, #0056b3);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0% 100%;
+}
+
+.fancy-link:hover {
+  color: #ff4500;
+  background-size: 100% 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-content-wrapper {
+    flex-direction: column;
+  }
+  
+  .project-image,
+  .project-description {
+    width: 100%;
+  }
+  
+  .project-image {
+    margin-bottom: 15px;
+    padding-right: 0;
+  }
+}
+
+
+.project-info-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.project-info {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.project-date {
+  display: inline-flex;
+  align-items: center;
+}
+
+.project-advisor {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #4682b4;
+  border-radius: 3px;
+}
+
+/* ... (rest of the CSS remains unchanged) ... */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-info-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .badge {
+    margin-top: 5px;
+  }
+}
+
+
+
+/* Highlight keywords */
+.highlight-keyword {
+  font-weight: bold;
+  color: #ff4500; /* You can change this color based on your design preferences */
+}
+
+/* Adjust badge styling for the description */
+.project-description .badge {
+  display: block;
+  margin-top: 10px;
+  background-color: #32cd32; /* Different color for the new badge */
+}
+
+
+/* Badge Wrapper */
+.badge-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Allows words to wrap to the next line */
+  gap: 10px; /* Adds space between badges */
+  margin-top: 10px; /* Adds some space above badges */
+}
+
+/* Badge Styling */
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #4682b4; /* Light blue font */
+  background-color: #e0f7fa; /* Light background */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Badge Hover Effect */
+.badge:hover {
+  background-color: #4682b4; /* Darker background on hover */
+  color: #fff; /* White text on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* Ensure that images and other large elements don't constrain badges */
+.project-content-wrapper {
+  width: 100%;
+}
+
+.project-description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+/* Badge Styling */
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #4682b4; /* Light blue font */
+  background-color: #e6f2ff; /* Light blue background */
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.badge:hover {
+  background-color: #4682b4; /* Darker blue on hover */
+  color: #fff; /* White text on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* GitHub logo styling */
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.github-link:hover {
+  color: #4682b4;
+}
+
+.github-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+/* Project title and GitHub link wrapper */
+.project-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+

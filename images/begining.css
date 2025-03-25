@@ -1,0 +1,75 @@
+#dhead {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#dpic {
+    text-align: center;
+    margin-right: 30px;
+}
+.ppic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+#ddesc {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    margin: 0 0 20px;
+    font-size: 36px;
+    align-self: center;
+}
+.interests-box {
+    background-color: #f0f8ff;
+    border: 2px solid #4682b4;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+}
+.interests-text {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    width: calc(100% - 30px);
+    display: inline-block;
+    white-space: normal;
+}
+#dico {
+    display: flex;
+    gap: 15px;
+}
+.iico {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.3s ease;
+}
+.iico:hover {
+    transform: scale(1.2);
+}
+@keyframes typing {
+    0%, 100% { width: 0 }
+    50% { width: 100% }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}

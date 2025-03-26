@@ -89,8 +89,6 @@ The website is designed with a clean, responsive interface featuring:
 ## 🔗 Credits
 
 This website draws inspiration from:
-- [Jon Barron's website](https://github.com/jonbarron/jonbarron_website)
-- [Aakash Patil](https://github.com/aakash30jan/LatexToWebpage)
 - [Andrej Karpathy](https://karpathy.ai/)
 
 ## 📄 License

@@ -41,6 +41,7 @@ The website is designed with a clean, responsive interface featuring:
 
 ```
 .
+├── version_1/            # Previous versions of my webpage (check `index.html` files)
 ├── images/               # Website images and project visuals
 ├── files/                # Downloadable files (CV, etc.)
 ├── Conferences/          # Conference papers and presentations

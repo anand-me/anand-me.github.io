@@ -6,6 +6,7 @@
     <title>Akshay Anand</title>
   <link rel="icon" type="image/x-icon" href="./Favicon/favicon_io/favicon.ico">
     <link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="mobile.css">
    <link rel="stylesheet" type="text/css" href="publications.css">
   <link rel="stylesheet" type="text/css" href="presentations.css">
   <link rel="stylesheet" type="text/css" href="projects.css">
@@ -25,19 +26,24 @@
   </head>
   <body>
   
-  <nav class="nav-bar">
-      <ul>
-        <li><a href="#about">About</a></li>
-		<li><a href="#skills">Skills</a></li>
-		<li><a href="#news">News</a></li>
-        <li><a href="#presentations">Presentations</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#projects">Projects</a></li>
-		<li><a href="#leadership">Leadership</a></li>
-		<li><a href="#awards">Awards</a></li>
-		<li><a href="#cv">CV</a></li>
-      </ul>
-    </nav>
+<nav class="nav-bar">
+  <div class="mobile-menu-toggle">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#presentations">Presentations</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#leadership">Leadership</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#cv">CV</a></li>
+  </ul>
+</nav>
 
 
 
@@ -142,6 +148,30 @@
   typeWriter();
 
 </script>
+
+<!-- Add this JavaScript at the end of your body tag -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileMenuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+    
+    // Close menu when clicking a link
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        mobileMenuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+  });
+</script>
+
+
 
 
   <hr>

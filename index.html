@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="theme-color" content="#007BFF">
     <title>Akshay Anand</title>
   <link rel="icon" type="image/x-icon" href="./Favicon/favicon_io/favicon.ico">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -149,27 +150,6 @@
 
 </script>
 
-<!-- Add this JavaScript at the end of your body tag -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    mobileMenuToggle.addEventListener('click', function() {
-      mobileMenuToggle.classList.toggle('active');
-      navMenu.classList.toggle('active');
-    });
-    
-    // Close menu when clicking a link
-    const navLinks = document.querySelectorAll('.nav-menu a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', function() {
-        mobileMenuToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-      });
-    });
-  });
-</script>
 
 
 
@@ -2008,6 +1988,26 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 1000);
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+  
+  mobileMenuToggle.addEventListener('click', function() {
+    mobileMenuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+  
+  // Close menu when clicking a link
+  const navLinks = document.querySelectorAll('.nav-menu a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      mobileMenuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  });
+});
+</script>
 
 </main>
   </body>

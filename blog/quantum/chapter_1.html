@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Classical Information and Computation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Dynamic animated background */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Floating particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-main h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            animation: pulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            to {
+                transform: scale(1.05);
+                text-shadow: 2px 2px 20px rgba(255,255,255,0.5);
+            }
+        }
+        
+        .chapter-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 0.95;
+                transform: translateY(0);
+            }
+        }
+        
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .header-meta > div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .header-meta > div:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .header-meta i {
+            opacity: 0.9;
+        }
+        
+        .progress-indicator {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00ccff, #ff6b9d);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(0,255,136,0.6);
+            animation: progressGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes progressGlow {
+            from {
+                box-shadow: 0 0 20px rgba(0,255,136,0.6);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(0,255,136,0.9), 0 0 40px rgba(0,204,255,0.6);
+            }
+        }
+        
+        .progress-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid #dee2e6;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .nav-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+        
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #007bff;
+            transform: translateY(-2px);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border-bottom: 3px solid #0056b3;
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeInRight 0.5s ease-in-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeInRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounceIn 0.8s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .concept-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #007bff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(0,123,255,0.1) 0%, transparent 70%);
+            transform: translate(50%, -50%);
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-left-color: #28a745;
+        }
+        
+        .concept-title {
+            font-size: 1.3rem;
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 60px rgba(102,126,234,0.4);
+            }
+        }
+        
+        .binary-converter {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #1976d2;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .binary-converter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(25,118,210,0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .converter-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .converter-input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+        
+        .converter-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 15px rgba(0,123,255,0.3);
+            transform: scale(1.05);
+        }
+        
+        .converter-arrow {
+            font-size: 1.5rem;
+            color: #1976d2;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .demo-button {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .demo-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .demo-button:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,123,255,0.4);
+        }
+        
+        .gate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .gate-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .gate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,123,255,0.1), transparent);
+            transition: left 0.8s;
+        }
+        
+        .gate-card:hover::before {
+            left: 100%;
+        }
+        
+        .gate-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: #007bff;
+        }
+        
+        .gate-symbol {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+            animation: rotateIcon 4s ease-in-out infinite;
+        }
+        
+        @keyframes rotateIcon {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(5deg) scale(1.1);
+            }
+            75% {
+                transform: rotate(-5deg) scale(1.1);
+            }
+        }
+        
+        .and-gate { color: #e74c3c; }
+        .or-gate { color: #f39c12; }
+        .not-gate { color: #9b59b6; }
+        .xor-gate { color: #1abc9c; }
+        .nand-gate { color: #e67e22; }
+        .nor-gate { color: #34495e; }
+        
+        .truth-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .truth-table:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .truth-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .truth-table th {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .truth-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            transition: background 0.3s ease;
+        }
+        
+        .truth-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .truth-table tr:hover td {
+            background: #e3f2fd;
+        }
+        
+        .exercise-box {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 2px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exercise-box::before {
+            content: '🧠';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: think 2s ease-in-out infinite;
+        }
+        
+        @keyframes think {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(10deg);
+            }
+        }
+        
+        .exercise-title {
+            font-size: 1.3rem;
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,123,255,0.4);
+        }
+        
+        /* Fun additions */
+        .emoji-float {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: emojiFloat 6s ease-in-out infinite;
+            z-index: 1000;
+        }
+        
+        @keyframes emojiFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-main h1 {
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .chapter-title {
+                font-size: 1.2rem;
+            }
+            
+            .header-meta {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .header-meta > div {
+                font-size: 0.9rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .gate-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .converter-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-main">
+                <h1><i class="fas fa-atom"></i> Quantum Computing Journey</h1>
+                <div class="chapter-title">Chapter 1: Classical Information and Computation</div>
+            </div>
+            
+            <div class="header-meta">
+                <div class="author-info">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Learning Notes by <strong>Akshay Anand</strong></span>
+                </div>
+                <div class="reference-info">
+                    <i class="fas fa-book"></i>
+                    <span>Reference: <em>Introduction to Classical and Quantum Computing</em> - Thomas G. Wong</span>
+                </div>
+                <div class="date-info">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>April 2025</span>
+                </div>
+            </div>
+            
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 20%;"></div>
+                </div>
+                <div class="progress-text">Chapter 1 of 5 • Classical Foundations</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showTab(event, 'overview')">
+                    <i class="fas fa-home"></i> Overview
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'bits')">
+                    <i class="fas fa-coins"></i> Bits & Binary
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'conversion')">
+                    <i class="fas fa-exchange-alt"></i> Conversion Tools
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'gates')">
+                    <i class="fas fa-microchip"></i> Logic Gates
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'exercises')">
+                    <i class="fas fa-brain"></i> Exercises
+                </button>
+            </div>
+            
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="section-title">
+                    <i class="fas fa-rocket"></i> What Is a Computer?
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-history"></i> From Human to Machine
+                    </div>
+                    <p>A long time ago, a "computer" was actually a person! These people did math calculations by hand. Later, machines took over the job. Now, we have tiny computers in our pockets—smartphones—that are more powerful than the computers that helped land astronauts on the moon! 🚀</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🧩 Classical vs Quantum Computing</h3>
+                    <p>To understand quantum computers, we need to understand classical computers first!</p>
+                </div>
+                
+                <table class="comparison-table" style="width: 100%; border-collapse: collapse; margin: 20px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr>
+                            <th style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 15px; text-align: left;">Concept</th>
+                            <th style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 15px; text-align: left;">Classical</th>
+                            <th style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 15px; text-align: left;">Quantum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Fundamental Unit</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Bit</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Qubit</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Gates</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Logic Gates</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Unitary Gates</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Reversible</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Sometimes</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Always</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Programming Language</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Verilog</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">OpenQASM</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Math Used</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Boolean Algebra</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Linear Algebra</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Error Correction</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Repetition Code</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">Shor Code</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;"><strong>Complexity Class</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">P</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #dee2e6;">BQP</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+			
+			  <!-- Bits & Binary Tab -->
+            <div id="bits" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-coins"></i> Understanding Bits
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-coins"></i> Coins and Probability
+                    </div>
+                    <p>Imagine flipping a coin. It can land on <strong>Heads (H)</strong> or <strong>Tails (T)</strong> - that's 2 possible outcomes.</p>
+                    <ul>
+                        <li>2 coins: 2 × 2 = 4 outcomes (HH, HT, TH, TT)</li>
+                        <li>3 coins: 2³ = 8 outcomes</li>
+                        <li>n coins: 2ⁿ outcomes</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-dice"></i> Dice and Information
+                    </div>
+                    <p>A regular die has 6 sides (1 to 6).</p>
+                    <ul>
+                        <li>2 dice: 6 × 6 = 36 outcomes</li>
+                        <li>3 dice: 6³ = 216 outcomes</li>
+                        <li>n dice: 6ⁿ outcomes</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>💡 Key Insight</h3>
+                    <p>Anything with 2 states (like a coin) carries the smallest amount of information. That's what a <strong>bit</strong> is!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-lightbulb"></i> Physical Bits
+                    </div>
+                    <p>Bits are everywhere in the physical world:</p>
+                    <ul>
+                        <li>💡 Light switch: Off (0) or On (1)</li>
+                        <li>💿 DVD: Pit (0) or Land (1)</li>
+                        <li>⚡ Circuit: 0 volts or 5 volts</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-binary"></i> Binary Numbers
+                    </div>
+                    <p>Binary uses only 0s and 1s. Each position represents a power of 2:</p>
+                    <div style="font-family: monospace; font-size: 1.2rem; text-align: center; margin: 15px 0;">
+                        Binary: &nbsp;&nbsp;1 &nbsp;&nbsp;0 &nbsp;&nbsp;1 &nbsp;&nbsp;1<br>
+                        Powers: &nbsp;&nbsp;8 &nbsp;&nbsp;4 &nbsp;&nbsp;2 &nbsp;&nbsp;1<br>
+                        Sum: 8 + 0 + 2 + 1 = 11
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conversion Tools Tab -->
+            <div id="conversion" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-exchange-alt"></i> Binary ↔ Decimal Conversion
+                </div>
+                
+                <div class="binary-converter">
+                    <h3>🔧 Interactive Converter</h3>
+                    <div class="converter-row">
+                        <input type="number" id="decimal-input" placeholder="Enter decimal" class="converter-input">
+                        <span class="converter-arrow">→</span>
+                        <input type="text" id="binary-output" placeholder="Binary result" class="converter-input" readonly>
+                        <button class="demo-button" onclick="convertToBinary()">Convert to Binary</button>
+                    </div>
+                    <div class="converter-row">
+                        <input type="text" id="binary-input" placeholder="Enter binary" class="converter-input">
+                        <span class="converter-arrow">→</span>
+                        <input type="number" id="decimal-output" placeholder="Decimal result" class="converter-input" readonly>
+                        <button class="demo-button" onclick="convertToDecimal()">Convert to Decimal</button>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-arrow-right"></i> Binary to Decimal Method
+                    </div>
+                    <p>Each binary digit represents a power of 2:</p>
+                    <div style="font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                        Example: 1011₂<br>
+                        1 × 2³ = 1 × 8 = 8<br>
+                        0 × 2² = 0 × 4 = 0<br>
+                        1 × 2¹ = 1 × 2 = 2<br>
+                        1 × 2⁰ = 1 × 1 = 1<br>
+                        Total: 8 + 0 + 2 + 1 = 11₁₀
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-arrow-left"></i> Decimal to Binary Method
+                    </div>
+                    <p>Find the largest power of 2 that fits, then subtract and repeat:</p>
+                    <div style="font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                        Example: 13₁₀<br>
+                        13 ≥ 8 (2³) → Yes, use 1 → 13 - 8 = 5<br>
+                        5 ≥ 4 (2²) → Yes, use 1 → 5 - 4 = 1<br>
+                        1 ≥ 2 (2¹) → No, use 0<br>
+                        1 ≥ 1 (2⁰) → Yes, use 1 → 1 - 1 = 0<br>
+                        Result: 1101₂
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Logic Gates Tab -->
+            <div id="gates" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-microchip"></i> Logic Gates
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🎮 What Are Logic Gates?</h3>
+                    <p>Logic gates are tiny decision-makers inside computers. They take bits (0s and 1s) as input and decide what the output should be based on simple rules.</p>
+                </div>
+                
+                <div class="gate-grid">
+                    <div class="gate-card">
+                        <div class="gate-symbol and-gate">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>AND Gate</h3>
+                        <p><strong>The Team Player:</strong> Both inputs must be 1 to get 1 output.</p>
+                        <div class="truth-table">
+                            <table>
+                                <tr><th>A</th><th>B</th><th>A AND B</th></tr>
+                                <tr><td>0</td><td>0</td><td>0</td></tr>
+                                <tr><td>0</td><td>1</td><td>0</td></tr>
+                                <tr><td>1</td><td>0</td><td>0</td></tr>
+                                <tr><td>1</td><td>1</td><td>1</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol or-gate">
+                            <i class="fas fa-party-horn"></i>
+                        </div>
+                        <h3>OR Gate</h3>
+                        <p><strong>The Friendly One:</strong> At least one input must be 1 to get 1 output.</p>
+                        <div class="truth-table">
+                            <table>
+                                <tr><th>A</th><th>B</th><th>A OR B</th></tr>
+                                <tr><td>0</td><td>0</td><td>0</td></tr>
+                                <tr><td>0</td><td>1</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>1</td><td>1</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol not-gate">
+                            <i class="fas fa-toggle-off"></i>
+                        </div>
+                        <h3>NOT Gate</h3>
+                        <p><strong>The Flipper:</strong> Always gives the opposite of the input.</p>
+                        <div class="truth-table">
+                            <table>
+                                <tr><th>A</th><th>NOT A</th></tr>
+                                <tr><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol xor-gate">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>XOR Gate</h3>
+                        <p><strong>The Exclusive One:</strong> Output is 1 only when inputs are different.</p>
+                        <div class="truth-table">
+                            <table>
+                                <tr><th>A</th><th>B</th><th>A XOR B</th></tr>
+                                <tr><td>0</td><td>0</td><td>0</td></tr>
+                                <tr><td>0</td><td>1</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>1</td><td>0</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol nand-gate">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <h3>NAND Gate</h3>
+                        <p><strong>NOT + AND:</strong> Opposite of AND gate.</p>
+                        <div class="truth-table">
+                            <table>
+                                <tr><th>A</th><th>B</th><th>A NAND B</th></tr>
+                                <tr><td>0</td><td>0</td><td>1</td></tr>
+                                <tr><td>0</td><td>1</td><td>1</td></tr>
+                                <tr><td>1</td><td>0</td><td>1</td></tr>
+                                <tr><td>1</td><td>1</td><td>0</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol nor-gate">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <h3>NOR Gate</h3>
+                        <p><strong>NOT + OR:</strong> Opposite of OR gate.</p>
+                        <div class="truth-table">
+                            <table>
+                                <tr><th>A</th><th>B</th><th>A NOR B</th></tr>
+                                <tr><td>0</td><td>0</td><td>1</td></tr>
+                                <tr><td>0</td><td>1</td><td>0</td></tr>
+                                <tr><td>1</td><td>0</td><td>0</td></tr>
+                                <tr><td>1</td><td>1</td><td>0</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercises Tab -->
+            <div id="exercises" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-brain"></i> Practice Exercises
+                </div>
+                
+                <div class="exercise-box">
+                    <div class="exercise-title">
+                        <i class="fas fa-coins"></i> Exercise 1.1: Coin Combinations
+                    </div>
+                    <p><strong>Question:</strong> How many outcomes for 4 coins? How many for 5 coins?</p>
+                    <div class="interactive-demo">
+                        <button class="demo-button" onclick="showAnswer('ex1')">Show Answer</button>
+                        <div id="ex1" class="demo-result" style="display: none;">
+                            4 coins: 2⁴ = 16 outcomes<br>
+                            5 coins: 2⁵ = 32 outcomes
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <div class="exercise-title">
+                        <i class="fas fa-dice"></i> Exercise 1.2: Dice Combinations
+                    </div>
+                    <p><strong>Question:</strong> How many outcomes for 4 dice? How many for 5 dice?</p>
+                    <div class="interactive-demo">
+                        <button class="demo-button" onclick="showAnswer('ex2')">Show Answer</button>
+                        <div id="ex2" class="demo-result" style="display: none;">
+                            4 dice: 6⁴ = 1,296 outcomes<br>
+                            5 dice: 6⁵ = 7,776 outcomes
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="exercise-box">
+                    <div class="exercise-title">
+                        <i class="fas fa-binary"></i> Exercise 1.5: Binary Conversions
+                    </div>
+                    <p><strong>Convert binary to decimal:</strong></p>
+                    <ul>
+                        <li>10111₂ = ?</li>
+                        <li>11001010₂ = ?</li>
+                    </ul>
+                    <p><strong>Convert decimal to binary:</strong></p>
+                    <ul>
+                        <li>42₁₀ = ?</li>
+                        <li>495₁₀ = ?</li>
+                    </ul>
+                    <div class="interactive-demo">
+                        <button class="demo-button" onclick="showAnswer('ex5')">Show Answers</button>
+                        <div id="ex5" class="demo-result" style="display: none;">
+                            10111₂ = 16+0+4+2+1 = 23₁₀<br>
+                            11001010₂ = 128+64+0+0+8+0+2+0 = 202₁₀<br>
+                            42₁₀ = 101010₂<br>
+                            495₁₀ = 111101111₂
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+    </div>
+            
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://a-anand.com/#blog" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Create floating particles
+        function createParticles() {
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Create floating emojis
+        function createFloatingEmojis() {
+            const emojis = ['🧠', '⚡', '🔬', '🎯', '💡', '🚀', '⚛️', '🌟', '💫', '🔮'];
+            
+            setInterval(() => {
+                if (Math.random() < 0.3) { // 30% chance every interval
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji-float';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = Math.random() * 100 + '%';
+                    emoji.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    document.body.appendChild(emoji);
+                    
+                    // Remove emoji after animation
+                    setTimeout(() => {
+                        if (emoji.parentNode) {
+                            emoji.parentNode.removeChild(emoji);
+                        }
+                    }, 7000);
+                }
+            }, 2000);
+        }
+
+        // Enhanced tab switching with sound effects
+        function showTab(evt, tabName) {
+            // Play a subtle click sound (you can add actual audio if desired)
+            
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("nav-tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            // Add a subtle shake effect to the content
+            const content = document.getElementById(tabName);
+            content.style.animation = 'none';
+            setTimeout(() => {
+                content.style.animation = 'fadeInRight 0.5s ease-in-out';
+            }, 10);
+        }
+
+        // Interactive binary converter with animations
+        function convertToBinary() {
+            const decimal = parseInt(document.getElementById('decimal-input').value);
+            if (isNaN(decimal)) {
+                showNotification('Please enter a valid decimal number! 🤔', 'warning');
+                return;
+            }
+            const binary = decimal.toString(2);
+            const output = document.getElementById('binary-output');
+            output.value = '';
+            
+            // Typewriter effect for the result
+            let i = 0;
+            const typeWriter = () => {
+                if (i < binary.length) {
+                    output.value += binary.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    showNotification('Conversion complete! ✨', 'success');
+                }
+            };
+            typeWriter();
+        }
+
+        function convertToDecimal() {
+            const binary = document.getElementById('binary-input').value;
+            if (!/^[01]+$/.test(binary)) {
+                showNotification('Please enter a valid binary number (only 0s and 1s)! 🔢', 'warning');
+                return;
+            }
+            const decimal = parseInt(binary, 2);
+            const output = document.getElementById('decimal-output');
+            
+            // Animated number counting effect
+            let current = 0;
+            const increment = decimal / 20;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= decimal) {
+                    output.value = decimal;
+                    clearInterval(timer);
+                    showNotification('Conversion complete! 🎉', 'success');
+                } else {
+                    output.value = Math.floor(current);
+                }
+            }, 50);
+        }
+
+        // Show/hide answers with animation
+        function showAnswer(exerciseId) {
+            const element = document.getElementById(exerciseId);
+            if (element.style.display === 'none' || !element.style.display) {
+                element.style.display = 'block';
+                element.style.animation = 'fadeInUp 0.5s ease-out';
+                showNotification('Answer revealed! 🧠', 'info');
+            } else {
+                element.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 300);
+            }
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 10px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                animation: slideInRight 0.5s ease-out;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            
+            switch(type) {
+                case 'success':
+                    notification.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                    break;
+                case 'warning':
+                    notification.style.background = 'linear-gradient(135deg, #ffc107, #fd7e14)';
+                    break;
+                case 'error':
+                    notification.style.background = 'linear-gradient(135deg, #dc3545, #e83e8c)';
+                    break;
+                default:
+                    notification.style.background = 'linear-gradient(135deg, #007bff, #6f42c1)';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 500);
+            }, 3000);
+        }
+
+        // Add CSS animations for notifications
+        const notificationStyles = document.createElement('style');
+        notificationStyles.textContent = `
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(100px);
+                }
+            }
+            
+            @keyframes fadeOut {
+                from {
+                    opacity: 1;
+                }
+                to {
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(notificationStyles);
+
+        // Enhanced hover effects for gate cards
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createFloatingEmojis();
+            
+            // Add interactive elements
+            const gateCards = document.querySelectorAll('.gate-card');
+            gateCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) rotateY(5deg) scale(1.05)';
+                    this.style.boxShadow = '0 25px 50px rgba(0,0,0,0.25)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) rotateY(0deg) scale(1)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+                });
+            });
+
+            // Add ripple effect to all buttons
+            const buttons = document.querySelectorAll('.demo-button, .nav-tab');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255,255,255,0.6);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        left: ${x}px;
+                        top: ${y}px;
+                        width: ${size}px;
+                        height: ${size}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Add parallax scrolling effect
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelector('.animated-background');
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px)`;
+            });
+
+            // Dynamic progress bar update based on scroll
+            window.addEventListener('scroll', function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                
+                const progressFill = document.querySelector('.progress-fill');
+                if (progressFill) {
+                    const baseProgress = 20; // Chapter 1 base progress
+                    const dynamicProgress = Math.min(baseProgress + (scrolled * 0.3), 100);
+                    progressFill.style.width = dynamicProgress + '%';
+                }
+            });
+
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '1':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="overview"]').click();
+                            showNotification('Switched to Overview! 🏠', 'info');
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="bits"]').click();
+                            showNotification('Switched to Bits & Binary! 🪙', 'info');
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="conversion"]').click();
+                            showNotification('Switched to Conversion Tools! 🔄', 'info');
+                            break;
+                        case '4':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="gates"]').click();
+                            showNotification('Switched to Logic Gates! 🔧', 'info');
+                            break;
+                        case '5':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="exercises"]').click();
+                            showNotification('Switched to Exercises! 🧠', 'info');
+                            break;
+                    }
+                }
+            });
+
+            // Add CSS for ripple effect
+            const rippleStyles = document.createElement('style');
+            rippleStyles.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(rippleStyles);
+
+            // Welcome message
+            setTimeout(() => {
+                showNotification('Welcome to Quantum Computing Journey! Use Ctrl+1-5 for quick navigation! 🚀', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

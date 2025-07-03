@@ -43,7 +43,6 @@
     <li><a href="#leadership">Leadership</a></li>
     <li><a href="#awards">Awards</a></li>
     <li><a href="#cv">CV</a></li>
-	<li><a href="#blog">Blog</a></li>
   </ul>
 </nav>
 
@@ -121,6 +120,69 @@
 </style>
 
 
+<style>
+/* Dark Mode Toggle Styles */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    transform: rotate(15deg);
+    opacity: 0.8;
+}
+
+/* CSS Variables for theming */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg: #f8f9fa;
+    --border-color: #e9ecef;
+    --accent-color: #007BFF;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+    --border-color: #444;
+    --accent-color: #4dabf7;
+}
+
+/* Apply theme to body and elements */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Icon visibility toggle */
+[data-theme="light"] .dark-mode-toggle .fa-sun {
+    display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle .fa-moon {
+    display: none;
+}
+
+[data-theme="dark"] .dark-mode-toggle {
+    color: #ffd43b;
+}
+</style>
+
+<!-- Dark Mode Toggle Button -->
+<button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+    <i class="fas fa-moon"></i>
+    <i class="fas fa-sun"></i>
+</button>
 
 <div id="demail"></div>
       <div id="demail"></div> 
@@ -274,6 +336,23 @@
       });
     });
   });
+</script>
+
+<script>
+// Dark mode toggle functionality
+function toggleDarkMode() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+}
+
+// Load saved theme on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+});
 </script>
   <!--- this JS to show only about all aother section shown on click   -->
 <!---
@@ -1948,506 +2027,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </ul>
   </div>
 </section>
-
-
-
-
-<!-- Blog Section -->
-<hr>
-<section id="blog">
-  <div class="container">
-    <h2 class="section-heading">Blog</h2>
-    
-    <!-- Blog Terminal Introduction -->
-    <div class="blog-terminal-container">
-      <div class="blog-terminal-header">
-        <div class="blog-terminal-buttons">
-          <span class="blog-terminal-button red"></span>
-          <span class="blog-terminal-button yellow"></span>
-          <span class="blog-terminal-button green"></span>
-        </div>
-        <div class="blog-terminal-title">blog_explorer.py</div>
-      </div>
-      <div class="blog-terminal-body">
-        <div class="blog-terminal-line">
-          <span class="blog-terminal-prompt">>>> </span>
-          <span class="blog-terminal-command" id="blog-typewriter-text"></span>
-        </div>
-        <div class="blog-terminal-output" id="blog-context-message">
-          <div class="blog-intro-text">Welcome to my technical blog! Here I share insights, tutorials, and deep dives into topics I'm learning:</div>
-          <ul class="blog-topics-list">
-            <li class="blog-topic-item">Deep Learning Frameworks & Implementation</li>
-            <li class="blog-topic-item">Generative AI & Diffusion Models</li>
-            <li class="blog-topic-item">Large Language Models & Applications</li>
-            <li class="blog-topic-item">Agentic AI Systems & Multi-Agent Frameworks</li>
-            <li class="blog-topic-item">Quantum Computing & Algorithms</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blog Categories Grid -->
-    <div class="blog-container">
-      <div class="blog-categories">
-        
-        <!-- PyTorch Category -->
-        <div class="blog-category-card pytorch-card" onclick="window.open('https://github.com/anand-me/deep-learning-with-pytorch-tutorials', '_blank')">
-          <i class="fas fa-fire blog-category-icon"></i>
-          <div class="blog-category-title">PyTorch</div>
-          <div class="blog-category-description">Deep learning tutorials, custom implementations, and advanced PyTorch techniques for research and production. Check out my GitHub repositories for code examples.</div>
-        </div>
-
-        <!-- Generative AI Category -->
-        <div class="blog-category-card genai-card" onclick="showComingSoon('Generative AI')">
-          <i class="fas fa-magic blog-category-icon"></i>
-          <div class="blog-category-title">Generative AI</div>
-          <div class="blog-category-description">Exploring diffusion models, GANs, VAEs, and the latest in generative artificial intelligence.</div>
-        </div>
-
-        <!-- LLM Category -->
-        <div class="blog-category-card llm-card" onclick="showComingSoon('Large Language Models')">
-          <i class="fas fa-language blog-category-icon"></i>
-          <div class="blog-category-title">Large Language Models</div>
-          <div class="blog-category-description">Fine-tuning, deployment, and applications of state-of-the-art language models.</div>
-        </div>
-
-        <!-- Agentic AI Category -->
-        <div class="blog-category-card agentic-card" onclick="showComingSoon('Agentic AI')">
-          <i class="fas fa-robot blog-category-icon"></i>
-          <div class="blog-category-title">Agentic AI</div>
-          <div class="blog-category-description">Building autonomous AI systems, multi-agent frameworks, and intelligent decision-making systems.</div>
-        </div>
-
-        <!-- Quantum Computing Category -->
-		<div class="blog-category-card pytorch-card" onclick="window.open('https://github.com/anand-me/anand-me.github.io/tree/master/blog/quantum', '_blank')">
-          <i class="fas fa-atom blog-category-icon"></i>
-          <div class="blog-category-title">Quantum Computing</div>
-          <div class="blog-category-description">Quantum algorithms, circuit design, and the intersection of quantum computing with machine learning.</div>
-        </div>
-
-      </div>
-
-      <!-- Blog Posts Section -->
-      <div class="blog-posts-section">
-        <h3>Latest Posts</h3>
-        
-        <!-- Coming Soon Placeholder -->
-        <div class="coming-soon">
-          <i class="fas fa-rocket coming-soon-icon"></i>
-          <h3>Exciting Content Coming Soon!</h3>
-          <p>I'm currently working on comprehensive tutorials and deep-dive articles across all these topics. Each section will feature detailed code examples, theoretical explanations, and practical applications. For now, check out my <a href="https://github.com/anand-me" class="fancy-link" target="_blank">GitHub repositories</a> for PyTorch implementations and research code.</p>
-        </div>
-
-        <!-- Placeholder for Future Blog Posts -->
-        <div class="blog-posts-grid" style="display: none;">
-          
-          <!-- Example Blog Post Structure (will be populated later) -->
-          <div class="blog-post-card">
-            <div class="blog-post-date">Coming Soon</div>
-            <div class="blog-post-title">Building Custom PyTorch Datasets for Scientific Computing</div>
-            <div class="blog-post-excerpt">Learn how to create efficient data loaders for large-scale scientific simulations and computational fluid dynamics data...</div>
-            <div class="blog-post-tags">
-              <span class="blog-tag">PyTorch</span>
-              <span class="blog-tag">Scientific Computing</span>
-              <span class="blog-tag">Data Loading</span>
-            </div>
-            <a href="#" class="blog-read-more">
-              Read More <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-
-          <div class="blog-post-card">
-            <div class="blog-post-date">Coming Soon</div>
-            <div class="blog-post-title">Implementing Diffusion Models from Scratch</div>
-            <div class="blog-post-excerpt">A comprehensive guide to understanding and implementing diffusion models for image generation...</div>
-            <div class="blog-post-tags">
-              <span class="blog-tag">Generative AI</span>
-              <span class="blog-tag">Diffusion Models</span>
-              <span class="blog-tag">Deep Learning</span>
-            </div>
-            <a href="#" class="blog-read-more">
-              Read More <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Blog Section Styles -->
-<style>
-  /* Blog Section Styles */
-  .blog-container {
-    margin-top: 2rem;
-  }
-  
-  .blog-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  
-  .blog-category-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border-radius: 15px;
-    padding: 2rem;
-    color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .blog-category-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  }
-  
-  .blog-category-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  
-  .blog-category-card:hover::before {
-    opacity: 1;
-  }
-  
-  .pytorch-card {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  }
-  
-  .genai-card {
-    background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
-  }
-  
-  .llm-card {
-    background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%);
-  }
-  
-  .agentic-card {
-    background: linear-gradient(135deg, #5f27cd 0%, #341f97 100%);
-  }
-  
-  .quantum-card {
-    background: linear-gradient(135deg, #ff9ff3 0%, #f368e0 100%);
-  }
-  
-  .blog-category-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-  }
-  
-  .blog-category-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-  
-  .blog-category-description {
-    font-size: 1rem;
-    opacity: 0.9;
-    line-height: 1.6;
-  }
-  
-  .blog-posts-section {
-    margin-top: 3rem;
-  }
-  
-  .blog-posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-  
-  .blog-post-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 4px solid #007BFF;
-  }
-  
-  .blog-post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  }
-  
-  .blog-post-date {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .blog-post-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    color: #333;
-  }
-  
-  .blog-post-excerpt {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-  
-  .blog-post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .blog-tag {
-    background: #f8f9fa;
-    color: #333;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-  
-  .blog-read-more {
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .blog-read-more:hover {
-    text-decoration: underline;
-  }
-  
-  .coming-soon {
-    text-align: center;
-    padding: 3rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    margin-top: 2rem;
-  }
-  
-  .coming-soon-icon {
-    font-size: 4rem;
-    color: #007BFF;
-    margin-bottom: 1rem;
-  }
-  
-  .coming-soon h3 {
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  .coming-soon p {
-    color: #666;
-    max-width: 500px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-
-  /* Terminal for Blog Section */
-  .blog-terminal-container {
-    background-color: #0d1117;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 2rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  }
-  
-  .blog-terminal-header {
-    background-color: #161b22;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #21262d;
-  }
-  
-  .blog-terminal-buttons {
-    display: flex;
-    gap: 8px;
-    margin-right: 15px;
-  }
-  
-  .blog-terminal-button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-  }
-  
-  .blog-terminal-button.red {
-    background-color: #ff5f56;
-  }
-  
-  .blog-terminal-button.yellow {
-    background-color: #ffbd2e;
-  }
-  
-  .blog-terminal-button.green {
-    background-color: #27c93f;
-  }
-  
-  .blog-terminal-title {
-    color: #c9d1d9;
-    font-size: 14px;
-    font-family: 'Monaco', 'Menlo', monospace;
-    flex-grow: 1;
-    text-align: center;
-  }
-  
-  .blog-terminal-body {
-    padding: 20px;
-    font-family: 'Monaco', 'Menlo', monospace;
-    color: #c9d1d9;
-    line-height: 1.6;
-  }
-  
-  .blog-terminal-line {
-    display: flex;
-    margin-bottom: 12px;
-  }
-  
-  .blog-terminal-prompt {
-    color: #7c3aed;
-    margin-right: 8px;
-    font-weight: bold;
-  }
-  
-  .blog-terminal-command {
-    color: #f59e0b;
-  }
-  
-  .blog-terminal-output {
-    color: #06b6d4;
-    padding-left: 20px;
-    margin-top: 10px;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-  }
-  
-  .blog-intro-text {
-    margin-bottom: 15px;
-  }
-  
-  .blog-topics-list {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .blog-topic-item {
-    margin-bottom: 8px;
-    padding-left: 20px;
-    position: relative;
-    opacity: 0;
-    transform: translateX(-15px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-  
-  .blog-topic-item::before {
-    content: "▶";
-    position: absolute;
-    left: 0;
-    color: #10b981;
-  }
-  
-  .blog-topic-item.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  
-  @keyframes blink-blog-cursor {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-  }
-  
-  .blog-terminal-command::after {
-    content: "_";
-    animation: blink-blog-cursor 0.8s infinite;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .blog-categories {
-      grid-template-columns: 1fr;
-    }
-    
-    .blog-posts-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .blog-category-card {
-      padding: 1.5rem;
-    }
-    
-    .blog-category-icon {
-      font-size: 2.5rem;
-    }
-    
-    .blog-category-title {
-      font-size: 1.25rem;
-    }
-  }
-</style>
-
-<!-- Blog Section JavaScript -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Blog terminal typewriter effect
-    const blogText = "import blog_categories as topics";
-    const typingSpeed = 80;
-    const typingDelay = 500;
-    
-    const blogTypewriterElement = document.getElementById('blog-typewriter-text');
-    const blogContextMessage = document.getElementById('blog-context-message');
-    const blogTopicItems = document.querySelectorAll('.blog-topic-item');
-    
-    if (blogTypewriterElement) {
-      setTimeout(function() {
-        let i = 0;
-        
-        function typeWriter() {
-          if (i < blogText.length) {
-            blogTypewriterElement.textContent += blogText.charAt(i);
-            i++;
-            setTimeout(typeWriter, typingSpeed);
-          } else {
-            setTimeout(function() {
-              blogContextMessage.style.opacity = "1";
-              
-              blogTopicItems.forEach((item, index) => {
-                setTimeout(() => {
-                  item.classList.add('visible');
-                }, 800 + (index * 300));
-              });
-            }, 300);
-          }
-        }
-        
-        typeWriter();
-      }, typingDelay);
-    }
-  });
-
-  // Function to show coming soon message
-  function showComingSoon(category) {
-    alert(`${category} content is coming soon! Stay tuned for comprehensive tutorials and insights.`);
-  }
-</script>
-
-
 
 
 

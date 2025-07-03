@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: One Quantum Bit (Qubit)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Dynamic animated background with quantum theme */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #a8edea, #fed6e3, #ff9a9e, #fecfef, #ffecd2, #fcb69f);
+            background-size: 400% 400%;
+            animation: quantumShift 12s ease infinite;
+        }
+        
+        @keyframes quantumShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            25% {
+                background-position: 100% 50%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            75% {
+                background-position: 0% 100%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        /* Quantum particles */
+        .quantum-particle {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(0,123,255,0.6) 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: quantumFloat 15s infinite linear;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        @keyframes quantumFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) translateX(50px) rotate(180deg);
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-main h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            animation: quantumPulse 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes quantumPulse {
+            from {
+                transform: scale(1);
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            to {
+                transform: scale(1.03);
+                text-shadow: 2px 2px 25px rgba(255,255,255,0.6), 0 0 30px rgba(0,123,255,0.4);
+            }
+        }
+        
+        .chapter-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            opacity: 0.95;
+            font-weight: 500;
+            animation: fadeInUp 1.2s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 0.95;
+                transform: translateY(0);
+            }
+        }
+        
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+        
+        .header-meta > div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            animation: slideInLeft 1.2s ease-out;
+        }
+        
+        .header-meta > div:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .progress-indicator {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b9d, #c471ed, #12c2e9);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 20px rgba(255,107,157,0.6);
+            animation: quantumProgressGlow 2.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes quantumProgressGlow {
+            from {
+                box-shadow: 0 0 20px rgba(255,107,157,0.6);
+            }
+            to {
+                box-shadow: 0 0 35px rgba(255,107,157,0.9), 0 0 45px rgba(196,113,237,0.6);
+            }
+        }
+        
+        .progress-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .nav-tabs {
+            display: flex;
+            background: rgba(248, 249, 250, 0.9);
+            border-bottom: 1px solid #dee2e6;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .nav-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+        
+        .nav-tab:hover {
+            background: #e9ecef;
+            color: #007bff;
+            transform: translateY(-2px);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(135deg, #ff6b9d, #c471ed);
+            color: white;
+            border-bottom: 3px solid #c471ed;
+            box-shadow: 0 5px 15px rgba(255,107,157,0.3);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeInRight 0.5s ease-in-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeInRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0);
+            }
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounceIn 0.8s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .concept-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #ff6b9d;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,107,157,0.1) 0%, transparent 70%);
+            transform: translate(50%, -50%);
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-left-color: #c471ed;
+        }
+        
+        .concept-title {
+            font-size: 1.3rem;
+            color: #495057;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c471ed 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: quantumShimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes quantumShimmer {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255,107,157,0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255,107,157,0.6), 0 0 60px rgba(196,113,237,0.4);
+            }
+        }
+        
+        .bloch-sphere-demo {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 2px solid #764ba2;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            text-align: center;
+        }
+        
+        .bloch-sphere-visual {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 3px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            animation: sphereRotate 8s linear infinite;
+        }
+        
+        @keyframes sphereRotate {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+        
+        .qubit-state {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff6b9d;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(255,107,157,0.8);
+            animation: qubitPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes qubitPulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 15px rgba(255,107,157,0.8);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: 0 0 25px rgba(255,107,157,1);
+            }
+        }
+        
+        .quantum-gate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .gate-card {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        
+        .gate-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,157,0.1), transparent);
+            transition: left 0.8s;
+        }
+        
+        .gate-card:hover::before {
+            left: 100%;
+        }
+        
+        .gate-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: #ff6b9d;
+        }
+        
+        .gate-symbol {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: gateFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes gateFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+        
+        .gate-x { color: #e74c3c; }
+        .gate-y { color: #f39c12; }
+        .gate-z { color: #9b59b6; }
+        .gate-h { color: #1abc9c; }
+        .gate-s { color: #e67e22; }
+        .gate-t { color: #34495e; }
+        
+        .measurement-simulator {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .probability-bars {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .prob-bar {
+            flex: 1;
+            max-width: 150px;
+        }
+        
+        .prob-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .prob-visual {
+            height: 100px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .prob-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #ff6b9d, #c471ed);
+            transition: height 0.5s ease;
+            border-radius: 5px;
+        }
+        
+        .demo-button {
+            background: linear-gradient(135deg, #ff6b9d, #c471ed);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .demo-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .demo-button:hover {
+            background: linear-gradient(135deg, #c471ed, #a855f7);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,157,0.4);
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ff6b9d, #c471ed);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,107,157,0.3);
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(135deg, #c471ed, #a855f7);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,157,0.4);
+        }
+        
+        /* Fun quantum effects */
+        .quantum-emoji {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: quantumEmojiFloat 8s ease-in-out infinite;
+            z-index: 1000;
+        }
+        
+        @keyframes quantumEmojiFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg) scale(0);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) rotate(36deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(10vh) rotate(324deg) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg) scale(0);
+            }
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-main h1 {
+                font-size: 2.2rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .chapter-title {
+                font-size: 1.2rem;
+            }
+            
+            .header-meta {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .header-meta > div {
+                font-size: 0.9rem;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .quantum-gate-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .probability-bars {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-main">
+                <h1><i class="fas fa-atom"></i> Quantum Computing Journey</h1>
+                <div class="chapter-title">Chapter 2: One Quantum Bit (Qubit)</div>
+            </div>
+            
+            <div class="header-meta">
+                <div class="author-info">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Learning Notes by <strong>Akshay Anand</strong></span>
+                </div>
+                <div class="reference-info">
+                    <i class="fas fa-book"></i>
+                    <span>Reference: <em>Introduction to Classical and Quantum Computing</em> - Thomas G. Wong</span>
+                </div>
+                <div class="date-info">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>June 2025</span>
+                </div>
+            </div>
+            
+            <div class="progress-indicator">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%;"></div>
+                </div>
+                <div class="progress-text">Chapter 2 of 5 • Quantum Foundations</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showTab(event, 'overview')">
+                    <i class="fas fa-home"></i> Overview
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'superposition')">
+                    <i class="fas fa-magic"></i> Superposition
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'measurement')">
+                    <i class="fas fa-eye"></i> Measurement
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'bloch')">
+                    <i class="fas fa-globe"></i> Bloch Sphere
+                </button>
+                <button class="nav-tab" onclick="showTab(event, 'gates')">
+                    <i class="fas fa-cog"></i> Quantum Gates
+                </button>
+            </div>
+            
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active">
+                <div class="section-title">
+                    <i class="fas fa-rocket"></i> Welcome to the Quantum World!
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-football-ball"></i> Qubit Touchdown: A Quantum Board Game
+                    </div>
+                    <p>Imagine a football game where the ball moves in strange ways—not just forward or backward, but to weird places like "plus," "minus i," or "square root of X." That's what the game Qubit Touchdown is like! 🏈</p>
+                    <p>Think of the football as a qubit. The way it moves on the board is like how a qubit changes when we apply different quantum gates.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🌟 What Makes Qubits Special?</h3>
+                    <p>Unlike classical bits that are either 0 or 1, qubits can be BOTH at the same time! This magical property is called <strong>superposition</strong>.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-atom"></i> Classical vs Quantum Bits
+                    </div>
+                    <p><strong>Classical Bit:</strong> Either 0 or 1 (like a light switch - on or off)</p>
+                    <p><strong>Quantum Bit (Qubit):</strong> Can be |0⟩, |1⟩, or BOTH simultaneously!</p>
+                    <ul style="margin-top: 10px;">
+                        <li>|0⟩ (read as "ket zero")</li>
+                        <li>|1⟩ (read as "ket one")</li>
+                        <li>|+⟩ = (|0⟩ + |1⟩)/√2 (superposition state)</li>
+                        <li>|−⟩ = (|0⟩ − |1⟩)/√2 (another superposition)</li>
+                    </ul>
+                </div>
+                
+                <div class="bloch-sphere-demo">
+                    <h3>🌍 The Bloch Sphere</h3>
+                    <p>We visualize qubits on a sphere where:</p>
+                    <div class="bloch-sphere-visual">
+                        <div class="qubit-state"></div>
+                    </div>
+                    <p>• North Pole = |0⟩ • South Pole = |1⟩ • Equator = Superposition states</p>
+                </div>
+            </div>
+            
+            <!-- Superposition Tab -->
+            <div id="superposition" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-magic"></i> Superposition: The Quantum Magic
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-coins"></i> The Spinning Coin Analogy
+                    </div>
+                    <p>Superposition is like spinning a coin—it's not just heads or tails, it's both until you look! 🪙</p>
+                    <p>When you measure a qubit in superposition, it "collapses" to either |0⟩ or |1⟩ with certain probabilities.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🌀 Common Superposition States</h3>
+                    <div style="text-align: left; margin-top: 15px;">
+                        <p><strong>|+⟩ = (|0⟩ + |1⟩)/√2</strong> → Equal chance of 0 or 1</p>
+                        <p><strong>|−⟩ = (|0⟩ − |1⟩)/√2</strong> → Also equal chance, but different phase</p>
+                        <p><strong>|i⟩ = (|0⟩ + i|1⟩)/√2</strong> → Using imaginary numbers!</p>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-calculator"></i> Complex Numbers in Quantum
+                    </div>
+                    <p>Quantum mechanics uses complex numbers with real and imaginary parts:</p>
+                    <div style="font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                        Example: 1 + i√3<br>
+                        Real part: 1<br>
+                        Imaginary part: √3<br><br>
+                        Two forms:<br>
+                        • Cartesian: x + iy<br>
+                        • Polar: r·e^(iθ)
+                    </div>
+                </div>
+                
+                <div class="measurement-simulator">
+                    <h3>🎲 Superposition Simulator</h3>
+                    <p>Click to create different superposition states:</p>
+                    <button class="demo-button" onclick="createSuperposition('plus')">Create |+⟩ State</button>
+                    <button class="demo-button" onclick="createSuperposition('minus')">Create |−⟩ State</button>
+                    <button class="demo-button" onclick="createSuperposition('i')">Create |i⟩ State</button>
+                    
+                    <div class="probability-bars">
+                        <div class="prob-bar">
+                            <div class="prob-label">|1⟩ Probability</div>
+                            <div class="prob-visual">
+                                <div class="prob-fill" id="prob-1" style="height: 50%;"></div>
+                            </div>
+                            <div id="prob-1-text">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Measurement Tab -->
+            <div id="measurement" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-eye"></i> Quantum Measurement
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-dice"></i> Measurement in the Z-Basis
+                    </div>
+                    <p>When you measure a qubit, it stops being in superposition and becomes either |0⟩ or |1⟩. The probability depends on the amplitudes (the numbers in front of |0⟩ and |1⟩).</p>
+                    <p><strong>Example:</strong> If a qubit is in state 0.6|0⟩ + 0.8|1⟩:</p>
+                    <ul>
+                        <li>Probability of measuring |0⟩ = |0.6|² = 0.36 = 36%</li>
+                        <li>Probability of measuring |1⟩ = |0.8|² = 0.64 = 64%</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>⚖️ Normalization Rule</h3>
+                    <p>The total probability must always add up to 1 (100%). Sometimes we need to adjust the numbers to make sure this happens!</p>
+                    <p>|α|² + |β|² = 1</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-compass"></i> Measurement in Other Bases
+                    </div>
+                    <p>You can measure qubits in different directions:</p>
+                    <ul>
+                        <li><strong>Z-basis:</strong> |0⟩ and |1⟩ (standard measurement)</li>
+                        <li><strong>X-basis:</strong> |+⟩ and |−⟩ (diagonal measurement)</li>
+                        <li><strong>Y-basis:</strong> |i⟩ and |−i⟩ (circular measurement)</li>
+                    </ul>
+                    <p>Each gives different results depending on the qubit's state!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-repeat"></i> Consecutive Measurements
+                    </div>
+                    <p>🔍 <strong>First measurement:</strong> Collapses the qubit to |0⟩ or |1⟩</p>
+                    <p>🔍 <strong>Second measurement (same basis):</strong> Always gives the same result</p>
+                    <p>🔍 <strong>Measurement in different basis:</strong> Can give a different result!</p>
+                </div>
+                
+                <div class="measurement-simulator">
+                    <h3>🎯 Interactive Measurement Lab</h3>
+                    <p>Create a qubit state and measure it in different bases:</p>
+                    <button class="demo-button" onclick="prepareQubit()">Prepare Random Qubit</button>
+                    <button class="demo-button" onclick="measureQubit('z')">Measure in Z-basis</button>
+                    <button class="demo-button" onclick="measureQubit('x')">Measure in X-basis</button>
+                    <button class="demo-button" onclick="measureQubit('y')">Measure in Y-basis</button>
+                    
+                    <div id="measurement-result" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px; font-weight: bold;">
+                        Click "Prepare Random Qubit" to start! 🚀
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bloch Sphere Tab -->
+            <div id="bloch" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-globe"></i> The Bloch Sphere
+                </div>
+                
+                <div class="bloch-sphere-demo" style="text-align: left;">
+                    <h3 style="text-align: center;">🌍 Visualizing Qubits in 3D</h3>
+                    <div class="bloch-sphere-visual" style="margin: 20px auto;">
+                        <div class="qubit-state"></div>
+                        <!-- Add coordinate lines -->
+                        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,255,255,0.3);"></div>
+                        <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(255,255,255,0.3);"></div>
+                    </div>
+                    <p style="text-align: center;">The Bloch sphere helps us visualize any qubit state in 3D space!</p>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-globe-americas"></i> Spherical Coordinates
+                    </div>
+                    <p>We can describe a qubit's position using two angles:</p>
+                    <ul>
+                        <li><strong>θ (theta):</strong> How far down from the north pole (0 to π)</li>
+                        <li><strong>φ (phi):</strong> How far around the equator (0 to 2π)</li>
+                    </ul>
+                    <div style="font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                        |ψ⟩ = cos(θ/2)|0⟩ + e^(iφ)sin(θ/2)|1⟩
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-cube"></i> Cartesian Coordinates
+                    </div>
+                    <p>You can also use x, y, z coordinates on the sphere:</p>
+                    <ul>
+                        <li><strong>x = sin(θ)cos(φ)</strong></li>
+                        <li><strong>y = sin(θ)sin(φ)</strong></li>
+                        <li><strong>z = cos(θ)</strong></li>
+                    </ul>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🎯 Key Bloch Sphere Points</h3>
+                    <div style="text-align: left;">
+                        <p><strong>North Pole (0,0,1):</strong> |0⟩ state</p>
+                        <p><strong>South Pole (0,0,-1):</strong> |1⟩ state</p>
+                        <p><strong>+X axis (1,0,0):</strong> |+⟩ state</p>
+                        <p><strong>-X axis (-1,0,0):</strong> |−⟩ state</p>
+                        <p><strong>+Y axis (0,1,0):</strong> |i⟩ state</p>
+                        <p><strong>-Y axis (0,-1,0):</strong> |−i⟩ state</p>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-wave-square"></i> Global vs Relative Phase
+                    </div>
+                    <p><strong>Global Phase:</strong> Changes that don't affect measurements (invisible)</p>
+                    <p><strong>Relative Phase:</strong> Changes that DO affect measurements (important!)</p>
+                    <p>Only relative phase matters for quantum computing! 🎭</p>
+                </div>
+            </div>
+            
+            <!-- Gates Tab -->
+            <div id="gates" class="tab-content">
+                <div class="section-title">
+                    <i class="fas fa-cog"></i> Quantum Gates
+                </div>
+                
+                <div class="highlight-box">
+                    <h3>🧰 What Are Quantum Gates?</h3>
+                    <p>Quantum gates are operations that rotate and transform qubits on the Bloch sphere. They're like magical tools that change the qubit's state!</p>
+                </div>
+                
+                <div class="quantum-gate-grid">
+                    <div class="gate-card">
+                        <div class="gate-symbol gate-x">
+                            <strong>X</strong>
+                        </div>
+                        <h3>Pauli-X Gate</h3>
+                        <p><strong>The Bit Flip:</strong> Flips |0⟩ ↔ |1⟩</p>
+                        <p>Like a classical NOT gate but for qubits!</p>
+                        <button class="demo-button" onclick="applyGate('X')">Apply X Gate</button>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol gate-y">
+                            <strong>Y</strong>
+                        </div>
+                        <h3>Pauli-Y Gate</h3>
+                        <p><strong>The Twist:</strong> Flips and adds phase</p>
+                        <p>Rotates around Y-axis on Bloch sphere</p>
+                        <button class="demo-button" onclick="applyGate('Y')">Apply Y Gate</button>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol gate-z">
+                            <strong>Z</strong>
+                        </div>
+                        <h3>Pauli-Z Gate</h3>
+                        <p><strong>The Phase Flip:</strong> Changes sign of |1⟩</p>
+                        <p>|0⟩ → |0⟩, |1⟩ → -|1⟩</p>
+                        <button class="demo-button" onclick="applyGate('Z')">Apply Z Gate</button>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol gate-h">
+                            <strong>H</strong>
+                        </div>
+                        <h3>Hadamard Gate</h3>
+                        <p><strong>The Superposition Maker:</strong> Creates |+⟩ from |0⟩</p>
+                        <p>The most important gate in quantum computing!</p>
+                        <button class="demo-button" onclick="applyGate('H')">Apply H Gate</button>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol gate-s">
+                            <strong>S</strong>
+                        </div>
+                        <h3>S Gate (Phase)</h3>
+                        <p><strong>The Quarter Turn:</strong> 90° rotation</p>
+                        <p>Adds i phase to |1⟩ component</p>
+                        <button class="demo-button" onclick="applyGate('S')">Apply S Gate</button>
+                    </div>
+                    
+                    <div class="gate-card">
+                        <div class="gate-symbol gate-t">
+                            <strong>T</strong>
+                        </div>
+                        <h3>T Gate</h3>
+                        <p><strong>The Eighth Turn:</strong> 45° rotation</p>
+                        <p>Fine-tuned phase adjustment</p>
+                        <button class="demo-button" onclick="applyGate('T')">Apply T Gate</button>
+                    </div>
+                </div>
+                
+                <div class="concept-card">
+                    <div class="concept-title">
+                        <i class="fas fa-sync-alt"></i> Reversibility
+                    </div>
+                    <p>All quantum gates are <strong>reversible</strong>! This means:</p>
+                    <ul>
+                        <li>You can always undo any quantum operation</li>
+                        <li>Information is never lost in quantum computing</li>
+                        <li>Every gate has an inverse gate</li>
+                    </ul>
+                </div>
+                
+                <div class="measurement-simulator">
+                    <h3>🎮 Quantum Gate Playground</h3>
+                    <p>Current qubit state: <span id="current-state">|0⟩</span></p>
+                    <div id="gate-result" style="margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.3); border-radius: 10px;">
+                        Start with |0⟩ and apply some gates! 🎯
+                    </div>
+                    <button class="demo-button" onclick="resetQubit()">Reset to |0⟩</button>
+                    <button class="demo-button" onclick="measureFinalState()">Measure Result</button>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://a-anand.com/#blog" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Blog
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // Create quantum particles
+        function createQuantumParticles() {
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'quantum-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 8 + 12) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Create floating quantum emojis
+        function createQuantumEmojis() {
+            const emojis = ['⚛️', '🌀', '🔬', '🎯', '💫', '🌟', '🔮', '🪐', '🌌', '✨'];
+            
+            setInterval(() => {
+                if (Math.random() < 0.4) {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'quantum-emoji';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    emoji.style.left = Math.random() * 100 + '%';
+                    emoji.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                    document.body.appendChild(emoji);
+                    
+                    setTimeout(() => {
+                        if (emoji.parentNode) {
+                            emoji.parentNode.removeChild(emoji);
+                        }
+                    }, 10000);
+                }
+            }, 3000);
+        }
+
+        // Qubit state management
+        let currentQubitState = { alpha: 1, beta: 0, phase: 0 }; // |0⟩
+
+        // Tab switching function
+        function showTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("nav-tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            const content = document.getElementById(tabName);
+            content.style.animation = 'none';
+            setTimeout(() => {
+                content.style.animation = 'fadeInRight 0.5s ease-in-out';
+            }, 10);
+        }
+
+        // Superposition simulator
+        function createSuperposition(type) {
+            const prob0Element = document.getElementById('prob-0');
+            const prob1Element = document.getElementById('prob-1');
+            const prob0Text = document.getElementById('prob-0-text');
+            const prob1Text = document.getElementById('prob-1-text');
+            
+            let prob0, prob1;
+            
+            switch(type) {
+                case 'plus':
+                    prob0 = prob1 = 50;
+                    showNotification('Created |+⟩ state! Equal superposition! ⚡', 'success');
+                    break;
+                case 'minus':
+                    prob0 = prob1 = 50;
+                    showNotification('Created |−⟩ state! Different phase! 🌀', 'info');
+                    break;
+                case 'i':
+                    prob0 = prob1 = 50;
+                    showNotification('Created |i⟩ state! Imaginary superposition! ✨', 'info');
+                    break;
+            }
+            
+            // Animate probability bars
+            prob0Element.style.height = prob0 + '%';
+            prob1Element.style.height = prob1 + '%';
+            prob0Text.textContent = prob0 + '%';
+            prob1Text.textContent = prob1 + '%';
+        }
+
+        // Measurement simulator
+        let preparedState = null;
+
+        function prepareQubit() {
+            // Create random qubit state
+            const theta = Math.random() * Math.PI;
+            const phi = Math.random() * 2 * Math.PI;
+            
+            preparedState = {
+                theta: theta,
+                phi: phi,
+                alpha: Math.cos(theta/2),
+                beta: Math.sin(theta/2) // Simplified - no complex exponential for demo
+            };
+            
+            document.getElementById('measurement-result').innerHTML = 
+                `🎲 Qubit prepared in random superposition!<br>
+                 θ = ${theta.toFixed(2)}, φ = ${phi.toFixed(2)}<br>
+                 Ready for measurement! 🎯`;
+            
+            showNotification('Random qubit state prepared! 🎲', 'success');
+        }
+
+        function measureQubit(basis) {
+            if (!preparedState) {
+                showNotification('Please prepare a qubit first! 🎯', 'warning');
+                return;
+            }
+            
+            let result;
+            let probability;
+            
+            switch(basis) {
+                case 'z':
+                    probability = Math.pow(Math.abs(preparedState.alpha), 2);
+                    result = Math.random() < probability ? '|0⟩' : '|1⟩';
+                    break;
+                case 'x':
+                    probability = 0.5; // Simplified for demo
+                    result = Math.random() < 0.5 ? '|+⟩' : '|−⟩';
+                    break;
+                case 'y':
+                    probability = 0.5; // Simplified for demo
+                    result = Math.random() < 0.5 ? '|i⟩' : '|−i⟩';
+                    break;
+            }
+            
+            document.getElementById('measurement-result').innerHTML = 
+                `📊 Measured in ${basis.toUpperCase()}-basis: <strong>${result}</strong><br>
+                 The qubit has collapsed! 💥<br>
+                 Probability was: ${(probability * 100).toFixed(1)}%`;
+            
+            showNotification(`Measurement result: ${result} 📊`, 'success');
+            preparedState = null; // Qubit is now collapsed
+        }
+
+        // Quantum gate simulator
+        function applyGate(gateName) {
+            let description;
+            
+            switch(gateName) {
+                case 'X':
+                    description = "Applied X gate! Flipped |0⟩ ↔ |1⟩";
+                    break;
+                case 'Y':
+                    description = "Applied Y gate! Flipped with phase twist";
+                    break;
+                case 'Z':
+                    description = "Applied Z gate! Phase flip on |1⟩";
+                    break;
+                case 'H':
+                    description = "Applied Hadamard gate! Created superposition";
+                    break;
+                case 'S':
+                    description = "Applied S gate! 90° phase rotation";
+                    break;
+                case 'T':
+                    description = "Applied T gate! 45° phase rotation";
+                    break;
+            }
+            
+            document.getElementById('gate-result').innerHTML = 
+                `🔧 ${description}<br>Qubit state has been transformed! ⚡`;
+            
+            showNotification(`${gateName} gate applied! 🔧`, 'success');
+        }
+
+        function resetQubit() {
+            currentQubitState = { alpha: 1, beta: 0, phase: 0 };
+            document.getElementById('current-state').textContent = '|0⟩';
+            document.getElementById('gate-result').innerHTML = 'Reset to |0⟩ state! Ready for gates! 🎯';
+            showNotification('Qubit reset to |0⟩! 🔄', 'info');
+        }
+
+        function measureFinalState() {
+            const states = ['|0⟩', '|1⟩', '|+⟩', '|−⟩'];
+            const result = states[Math.floor(Math.random() * states.length)];
+            
+            document.getElementById('gate-result').innerHTML = 
+                `📊 Final measurement: <strong>${result}</strong><br>
+                 Quantum superposition collapsed! 💥`;
+            
+            showNotification(`Final result: ${result} 🎯`, 'success');
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 10px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                animation: slideInRight 0.5s ease-out;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            
+            switch(type) {
+                case 'success':
+                    notification.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                    break;
+                case 'warning':
+                    notification.style.background = 'linear-gradient(135deg, #ffc107, #fd7e14)';
+                    break;
+                case 'error':
+                    notification.style.background = 'linear-gradient(135deg, #dc3545, #e83e8c)';
+                    break;
+                default:
+                    notification.style.background = 'linear-gradient(135deg, #ff6b9d, #c471ed)';
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 500);
+            }, 3000);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createQuantumParticles();
+            createQuantumEmojis();
+            
+            // Add notification styles
+            const notificationStyles = document.createElement('style');
+            notificationStyles.textContent = `
+                @keyframes slideInRight {
+                    from { opacity: 0; transform: translateX(100px); }
+                    to { opacity: 1; transform: translateX(0); }
+                }
+                @keyframes slideOutRight {
+                    from { opacity: 1; transform: translateX(0); }
+                    to { opacity: 0; transform: translateX(100px); }
+                }
+            `;
+            document.head.appendChild(notificationStyles);
+
+            // Enhanced interactions
+            const gateCards = document.querySelectorAll('.gate-card');
+            gateCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) rotateY(5deg) scale(1.05)';
+                    this.style.boxShadow = '0 25px 50px rgba(0,0,0,0.25)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) rotateY(0deg) scale(1)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+                });
+            });
+
+            // Keyboard shortcuts for Chapter 2
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case '1':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="overview"]').click();
+                            showNotification('Switched to Overview! 🏠', 'info');
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="superposition"]').click();
+                            showNotification('Switched to Superposition! 🌀', 'info');
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="measurement"]').click();
+                            showNotification('Switched to Measurement! 👁️', 'info');
+                            break;
+                        case '4':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="bloch"]').click();
+                            showNotification('Switched to Bloch Sphere! 🌍', 'info');
+                            break;
+                        case '5':
+                            e.preventDefault();
+                            document.querySelector('[onclick*="gates"]').click();
+                            showNotification('Switched to Quantum Gates! ⚙️', 'info');
+                            break;
+                    }
+                }
+            });
+
+            // Welcome message
+            setTimeout(() => {
+                showNotification('Welcome to the Quantum World! Press Ctrl+1-5 for navigation! ⚛️', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

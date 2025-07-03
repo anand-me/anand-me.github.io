@@ -1985,47 +1985,157 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       </div>
     </div>
+ 
 
-    <!-- Blog Categories Grid -->
-    <div class="blog-container">
-      <div class="blog-categories">
-        
-        <!-- PyTorch Category -->
-        <div class="blog-category-card pytorch-card" onclick="window.open('https://github.com/anand-me/deep-learning-with-pytorch-tutorials', '_blank')">
-          <i class="fas fa-fire blog-category-icon"></i>
-          <div class="blog-category-title">PyTorch</div>
-          <div class="blog-category-description">Deep learning tutorials, custom implementations, and advanced PyTorch techniques for research and production. Check out my GitHub repositories for code examples.</div>
-        </div>
 
-        <!-- Generative AI Category -->
-        <div class="blog-category-card genai-card" onclick="showComingSoon('Generative AI')">
-          <i class="fas fa-magic blog-category-icon"></i>
-          <div class="blog-category-title">Generative AI</div>
-          <div class="blog-category-description">Exploring diffusion models, GANs, VAEs, and the latest in generative artificial intelligence.</div>
-        </div>
-
-        <!-- LLM Category -->
-        <div class="blog-category-card llm-card" onclick="showComingSoon('Large Language Models')">
-          <i class="fas fa-language blog-category-icon"></i>
-          <div class="blog-category-title">Large Language Models</div>
-          <div class="blog-category-description">Fine-tuning, deployment, and applications of state-of-the-art language models.</div>
-        </div>
-
-        <!-- Agentic AI Category -->
-        <div class="blog-category-card agentic-card" onclick="showComingSoon('Agentic AI')">
-          <i class="fas fa-robot blog-category-icon"></i>
-          <div class="blog-category-title">Agentic AI</div>
-          <div class="blog-category-description">Building autonomous AI systems, multi-agent frameworks, and intelligent decision-making systems.</div>
-        </div>
-
-        <!-- Quantum Computing Category -->
-		<div class="blog-category-card pytorch-card" onclick="window.open('https://github.com/anand-me/anand-me.github.io/tree/master/blog/quantum', '_blank')">
-          <i class="fas fa-atom blog-category-icon"></i>
-          <div class="blog-category-title">Quantum Computing</div>
-          <div class="blog-category-description">Quantum algorithms, circuit design, and the intersection of quantum computing with machine learning.</div>
-        </div>
-
+	  
+	  <!-- Blog Categories Grid -->
+<div class="blog-container">
+  <div class="blog-categories">
+    
+    <!-- PyTorch Category -->
+    <div class="blog-category-card pytorch-card" onclick="window.open('https://github.com/anand-me/deep-learning-with-pytorch-tutorials', '_blank')">
+      <i class="fas fa-fire blog-category-icon"></i>
+      <div class="blog-category-title">PyTorch</div>
+      <div class="blog-category-description">Deep learning tutorials, custom implementations, and advanced PyTorch techniques for research and production. <a href="https://github.com/anand-me/deep-learning-with-pytorch-tutorials" target="_blank" class="category-link">Check out my GitHub repositories</a> for code examples.</div>
+    </div>
+    
+    <!-- Quantum Computing Category -->
+    <div class="blog-category-card quantum-card" onclick="window.open('https://github.com/anand-me/anand-me.github.io/tree/master/blog/quantum', '_blank')">
+      <i class="fas fa-atom blog-category-icon"></i>
+      <div class="blog-category-title">Quantum Computing</div>
+      <div class="blog-category-description">Quantum algorithms, circuit design, and my learning journey through quantum computing fundamentals. <a href="https://github.com/anand-me/anand-me.github.io/tree/master/blog/quantum" target="_blank" class="category-link">Explore my quantum notes</a> and interactive chapters.</div>
+    </div>
+    
+<!-- Generative AI Category with Image -->
+<div class="blog-category-card genai-card" onclick="showComingSoon('Generative AI')">
+  <i class="fas fa-magic blog-category-icon"></i>
+  <div class="blog-category-title">Generative AI</div>
+  <div class="blog-category-description">Exploring diffusion models, GANs, VAEs, and the latest in generative artificial intelligence.</div>
+  
+  <!-- Sample work showcase -->
+  <div class="category-showcase">
+    <div class="showcase-label">Sample Research Work:</div>
+    <div class="showcase-image">
+      <img src="https://github.com/anand-me/anand-me.github.io/raw/master/blog/gen_ai/sample.jpg" 
+           alt="Generative AI Research Pipeline" 
+           class="research-sample" />
+      <div class="image-overlay">
+        <span class="overlay-text">Multi-Stage AI Pipeline Coupled with Physics</span>
       </div>
+    </div>
+  </div>
+</div>
+    
+    <!-- LLM Category -->
+    <div class="blog-category-card llm-card" onclick="showComingSoon('Large Language Models')">
+      <i class="fas fa-language blog-category-icon"></i>
+      <div class="blog-category-title">Large Language Models</div>
+      <div class="blog-category-description">Fine-tuning, deployment, and applications of state-of-the-art language models.</div>
+    </div>
+    
+    <!-- Agentic AI Category -->
+    <div class="blog-category-card agentic-card" onclick="showComingSoon('Agentic AI')">
+      <i class="fas fa-robot blog-category-icon"></i>
+      <div class="blog-category-title">Agentic AI</div>
+      <div class="blog-category-description">Building autonomous AI systems, multi-agent frameworks, and intelligent decision-making systems.</div>
+    </div>
+   
+  </div>
+</div>
+
+<style>
+  /* Updated category card colors */
+  .pytorch-card {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  }
+  
+  .quantum-card {
+    background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  }
+  
+  .genai-card {
+    background: linear-gradient(135deg, #4834d4 0%, #686de0 100%);
+  }
+  
+  .llm-card {
+    background: linear-gradient(135deg, #00d2d3 0%, #54a0ff 100%);
+  }
+  
+  .agentic-card {
+    background: linear-gradient(135deg, #5f27cd 0%, #341f97 100%);
+  }
+  
+  /* Category link styling */
+  .category-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .category-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+  
+  .category-link::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: width 0.3s ease;
+  }
+  
+  .category-link:hover::before {
+    width: 100%;
+  }
+  
+  /* Enhanced hover effects for cards with links */
+  .pytorch-card:hover {
+    background: linear-gradient(135deg, #ee5a24 0%, #d63031 100%);
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(238, 90, 36, 0.4);
+  }
+  
+  .quantum-card:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(124, 58, 237, 0.4);
+  }
+  
+  /* Prevent card click when clicking links */
+  .category-link {
+    position: relative;
+    z-index: 10;
+  }
+  
+  .category-link:hover {
+    cursor: pointer;
+  }
+  
+  /* Stop propagation for link clicks */
+  .blog-category-card {
+    position: relative;
+  }
+</style>
+
+<script>
+  // Prevent card click when clicking on links
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoryLinks = document.querySelectorAll('.category-link');
+    categoryLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent the card's onclick from firing
+      });
+    });
+  });
+</script>
 
       <!-- Blog Posts Section -->
       <div class="blog-posts-section">
@@ -2035,7 +2145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="coming-soon">
           <i class="fas fa-rocket coming-soon-icon"></i>
           <h3>Exciting Content Coming Soon!</h3>
-          <p>I'm currently working on comprehensive tutorials and deep-dive articles across all these topics. Each section will feature detailed code examples, theoretical explanations, and practical applications. For now, check out my <a href="https://github.com/anand-me" class="fancy-link" target="_blank">GitHub repositories</a> for PyTorch implementations and research code.</p>
+          <p>I'm currently working on comprehensive tutorials and deep-dive articles across all these topics. Each section will feature detailed code examples, theoretical explanations, and practical applications. For now, check out my <a href="https://github.com/anand-me/deep-learning-with-pytorch-tutorials" class="fancy-link" target="_blank">GitHub repositories</a> for PyTorch implementations and research code.</p>
         </div>
 
         <!-- Placeholder for Future Blog Posts -->

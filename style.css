@@ -336,29 +336,4 @@ hr {
   margin-top: 80px;
 }
 
-/* For the smmoth loading of each scetion */
 
-.content-section {
-  display: none;
-}
-
-.content-section.active {
-  display: block;
-}
-
-.section-heading {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 30px;
-  text-align: left;
-  font-family: 'Georgia', serif;
-  letter-spacing: 2px;
-  border-bottom: 2px solid #4682b4;
-  padding-bottom: 10px;
-  transition: color 0.3s ease;
-}
-
-.section-heading:hover {
-  color: #4682b4;
-}

@@ -54,7 +54,39 @@
   <div class="row">
     <div id="dpic">
       <img src="images/akshay_graduation.jpeg" class="ppic" alt="Akshay Anand">
+      <div class="pde-mini-gallery">
+        <p class="pde-gallery-label">PDE Solvers</p>
+        <div class="pde-gallery-items">
+          <div class="pde-gallery-item">
+            <img src="images/heat_final.gif" alt="Heat Equation" class="pde-thumb" onclick="openPdeModal(this.src, 'Heat Equation: FD vs Exact (Fourier series)')">
+            <span class="pde-caption">Heat Eq.</span>
+          </div>
+          <div class="pde-gallery-item">
+            <img src="images/burgers_final.gif" alt="Burgers Equation" class="pde-thumb" onclick="openPdeModal(this.src, 'Burgers Equation: Numerical Solution')">
+            <span class="pde-caption">Burgers Eq.</span>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- PDE Modal -->
+    <div id="pde-modal" onclick="closePdeModal()" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; display:none; align-items:center; justify-content:center; cursor:zoom-out;">
+      <div style="max-width:90vw; max-height:90vh; text-align:center;">
+        <img id="pde-modal-img" src="" style="max-width:100%; max-height:80vh; border-radius:8px;">
+        <p id="pde-modal-caption" style="color:#fff; margin-top:10px; font-size:14px;"></p>
+      </div>
+    </div>
+    <script>
+      function openPdeModal(src, caption) {
+        var m = document.getElementById('pde-modal');
+        document.getElementById('pde-modal-img').src = src;
+        document.getElementById('pde-modal-caption').textContent = caption;
+        m.style.display = 'flex';
+      }
+      function closePdeModal() {
+        document.getElementById('pde-modal').style.display = 'none';
+      }
+    </script>
     <div id="ddesc">
 	<h1 style="text-align: center; transform: translateX(-70px);">Akshay Anand (Nick)</h1>
       <!--<h1>Akshay Anand</h1> -->
@@ -64,7 +96,7 @@
 
   <!-- New Text Box with Animation -->
   <div class="job-market-box">
-    <p class="job-market-text">In job market for full-time opportunities starting <strong>April 2026</strong></p>
+    <p class="job-market-text">Currrntly working in the intersection of turbomachinery, CFD, machine-learning for fluid dynamics problems, expanding my work in the arena of <strong>AI agnets for industrial problems</strong></p>
 
   </div>
 
